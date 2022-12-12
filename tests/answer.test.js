@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const request = require('supertest')
-const { Answer } = require('../src/models/answer')
+const { Answer } = require('../src/models')
 const app = require('../src/app')
 
 describe('/answers', () => {
