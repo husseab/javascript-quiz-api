@@ -1,5 +1,6 @@
 const express = require('express')
 const answerModel = require('./routes/answer')
+const questionModel = require('./routes/question')
 
 const app = express()
 
@@ -10,5 +11,6 @@ app.get('/', (_, res) => {
 })
 
 app.use('/answers', answerModel)
+app.use('/questions', questionModel)
 
 module.exports = app
