@@ -5,5 +5,11 @@ const router = express.Router()
 
 router.route('/')
   .post(AnswerController.createAnswer)
+  .get(AnswerController.getAllAnswers)
+
+router.route('/:id')
+  .get(AnswerController.getAnswerByID)
+  .patch(AnswerController.updateAnswer)
+  .delete(AnswerController.deleteAnswer)
 
 module.exports = router

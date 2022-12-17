@@ -27,7 +27,6 @@ const getAllItems = (res, model) => {
 
 const createItem = (res, model, item) => {
   const Model = getModel(model)
-console.log(item, "<-item")
   return Model.create(item)
     .then((newItemCreated) => {
       res.status(201).json(newItemCreated)
