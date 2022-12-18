@@ -7,5 +7,9 @@ router.route('/')
   .post(QuestionController.createQuestion)
   .get(QuestionController.getAllQuestions)
 
+router.route('/:id')
+  .get(QuestionController.getQuestionByID)
+  .patch(QuestionController.updateQuestion)
+  .delete(QuestionController.deleteQuestion)
 
 module.exports = router

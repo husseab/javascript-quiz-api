@@ -70,7 +70,6 @@ describe.only('/questions', () => {
     describe('GET /questions', () => {
       it('gets all question records', async () => {
         const response = await request(app).get('/questions')
-  
         expect(response.status).to.equal(200)
         expect(response.body.length).to.equal(3)
   
@@ -82,59 +81,59 @@ describe.only('/questions', () => {
       })
     })
 
-    describe('GET /answers/:id', () => {
-      xit('gets answer record by id', async () => {
-        const answerItem = answers[0]
-        const response = await request(app).get(`/answers/${answerItem.id}`)
+    describe('GET /questions/:id', () => {
+      it('gets question record by id', async () => {
+        const questionItem = questions[0]
+        const response = await request(app).get(`/questions/${questionItem.id}`)
         expect(response.status).to.equal(200)
-        expect(response.body.answer).to.equal(answerItem.answer)
+        expect(response.body.question).to.equal(questionItem.question)
       })
 
-      xit('returns a 404 if the answer does not exist', async () => {
-        const response = await request(app).get('/answers/12345')
+      it('returns a 404 if the question does not exist', async () => {
+        const response = await request(app).get('/questions/12345')
 
         expect(response.status).to.equal(404)
-        expect(response.body.error).to.equal('The answer could not be found.')
+        expect(response.body.error).to.equal('The question could not be found.')
       })
     })
 
-    describe('PATCH /answers/:id', () => {
-      xit('updates answers by id', async () => {
-        const answerItem = answers[0]
+    describe('PATCH /questions/:id', () => {
+      it('updates questions by id', async () => {
+        const questionItem = questions[0]
         const response = await request(app)
-          .patch(`/answers/${answerItem.id}`)
-          .send({ answer: 'updatedAnswer' })
-        const updatedAnswerRecord = await Answer.findByPk(answerItem.id, {
+          .patch(`/questions/${questionItem.id}`)
+          .send({ question: 'updatedQuestion' })
+        const updatedQuestionRecord = await Question.findByPk(questionItem.id, {
           raw: true
         })
 
         expect(response.status).to.equal(200)
-        expect(updatedAnswerRecord.answer).to.equal('updatedAnswer')
+        expect(updatedQuestionRecord.question).to.equal('updatedQuestion')
       })
 
-      xit('returns a 404 if the answer does not exist', async () => {
+      it('returns a 404 if the question does not exist', async () => {
         const response = await request(app)
-          .patch('/answers/12345')
-          .send({ answer: 'updatedAnswer' })
+          .patch('/questions/12345')
+          .send({ question: 'updatedQuestion' })
 
         expect(response.status).to.equal(404)
-        expect(response.body.error).to.equal('The answer could not be found.')
+        expect(response.body.error).to.equal('The question could not be found.')
       })
     })
 
-    describe('DELETE /answers/:id', () => {
-      xit('deletes answer record by id', async () => {
-        const answerItem = answers[0]
-        const response = await request(app).delete(`/answers/${answerItem.id}`)
-        const deletedAnswer = await Answer.findByPk(answerItem.id, { raw: true })
+    describe('DELETE /questions/:id', () => {
+      it('deletes question record by id', async () => {
+        const questionItem = questions[0]
+        const response = await request(app).delete(`/questions/${questionItem.id}`)
+        const deletedQuestion = await Question.findByPk(questionItem.id, { raw: true })
         expect(response.status).to.equal(204)
-        expect(deletedAnswer).to.equal(null)
+        expect(deletedQuestion).to.equal(null)
       })
 
-      xit('returns a 404 if the answer does not exist', async () => {
-        const response = await request(app).delete('/answers/nonExistentAnswer')
+      it('returns a 404 if the question does not exist', async () => {
+        const response = await request(app).delete('/questions/nonExistentQuestion')
         expect(response.status).to.equal(404)
-        expect(response.body.error).to.equal('The answer could not be found.')
+        expect(response.body.error).to.equal('The question could not be found.')
       })
     })
   })

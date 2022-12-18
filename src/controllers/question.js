@@ -1,11 +1,19 @@
-const { createItem, getAllItems } = require('../controllers/helpers')
+const { createItem, getAllItems, getItemById, updateItem, deleteItem } = require('../controllers/helpers')
 
 const createQuestion = (req, res) => createItem(res, 'question', req.body)
 
 const getAllQuestions = (req, res) => getAllItems(res, 'question')
 
+const getQuestionByID = (req, res) => getItemById(res, 'question', req.params.id)
+
+const updateQuestion = (req, res) => updateItem(res, 'question', req.body, req.params.id)
+
+const deleteQuestion = (req, res) => deleteItem(res, 'question', req.params.id)
 
 module.exports = {
   createQuestion,
-  getAllQuestions
+  getAllQuestions,
+  getQuestionByID,
+  updateQuestion,
+  deleteQuestion
 }
