@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 
 app.get('/', (_, res) => {
-  res.status(200).json({ result: 'Welcome to the Back End API for javascript quiz app!' })
+  res.status(200).json({ result: 'Welcome to the Back End API for javascript quiz app! use /questions and /answers paths to see what is available.' })
 })
 
 app.use('/answers', answerModel)
