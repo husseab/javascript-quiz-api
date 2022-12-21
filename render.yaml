@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: javascript_quiz
+    env: node
+    region: frankfurt
+    plan: free
+    buildCommand: npm ci
+    startCommand: node index.js
+    envVars:
+      - key: DB_NAME
+        fromDatabase:
+          name: javascript_quiz_dev
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: javascript_quiz_dev
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: javascript_quiz_dev
+          property: password
+      - key: DB_HOST
+        fromDatabase:
+          name: javascript_quiz_dev
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: javascript_quiz_dev
+          property: port
+
+databases:
+  - name: javascript_quiz_dev
+    plan: free
+    region: frankfurt
+    databaseName: books
+    ipAllowList: [] 

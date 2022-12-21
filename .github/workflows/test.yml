@@ -1,0 +1,50 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [15.x]
+    
+    env:
+
+      DB_PASSWORD: 'password'
+      DB_NAME: 'javascript_quiz_dev'
+      DB_USER: 'root'
+      DB_HOST: 'localhost'
+      DB_PORT: 3307
+      Port: 3000
+      DIALECT: mysql
+
+
+
+    steps:
+
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          host port: 3800
+          container port: 3307 
+          character set server: 'utf8' 
+          collation server: 'utf8_general_ci' 
+          mysql database: 'javascript_quiz_dev' 
+          mysql user: 'root' 
+          mysql password: 'password' 
+      - run: sleep 30
+      - run: npm install sequelize@${{ matrix.sequelize-version }} 
+      - run: sleep 30
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test

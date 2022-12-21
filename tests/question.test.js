@@ -3,7 +3,7 @@ const request = require('supertest')
 const { Question } = require('../src/models')
 const app = require('../src/app')
 
-describe.only('/questions', () => {
+describe('/questions', () => {
   before(async () => Question.sequelize.sync())
 
   beforeEach(async () => {
@@ -14,7 +14,8 @@ describe.only('/questions', () => {
     describe('POST /questions', () => {
       it('creates a new question in the database', async () => {
         const response = await request(app).post('/questions').send({
-          question: 'New Question'
+          question: 'New Question',
+          topic: 'frontend question'
         })
         const newQuestionRecord = await Question.findByPk(response.body.id, {
           raw: true
@@ -26,7 +27,8 @@ describe.only('/questions', () => {
       })
       it('does not create a new question in the database--no text', async () => {
         const response = await request(app).post('/questions').send({
-          question: ""
+          question: "",
+          topic: 'frontend question'
         })
         const newQuestionRecord = await Question.findByPk(response.body.id, {
           raw: true
@@ -38,7 +40,8 @@ describe.only('/questions', () => {
       })
       it('does not create a new question in the database--NULL', async () => {
         const response = await request(app).post('/questions').send({
-          question: null
+          question: null,
+          topic: 'frontend question'
         })
         const newQuestionRecord = await Question.findByPk(response.body.id, {
           raw: true
@@ -56,13 +59,16 @@ describe.only('/questions', () => {
     beforeEach(async () => {
       questions = await Promise.all([
         Question.create({
-          question: 'newQuestion1'
+          question: 'newQuestion1',
+          topic: 'frontend question1'
         }),
         Question.create({
-            question: 'newQuestion2'
+            question: 'newQuestion2',
+            topic: 'frontend question2'
           }),
           Question.create({
-            question: 'newQuestion3'
+            question: 'newQuestion3',
+            topic: 'frontend question3'
           })
       ])
     })
