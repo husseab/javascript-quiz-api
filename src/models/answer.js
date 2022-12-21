@@ -13,7 +13,11 @@ module.exports = (connection, DataTypes) => {
             msg: 'Answer cannot be empty'
           }
         }
-      }
+      },
+      result: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      } 
     }
     const RemoveTimeStamp = {
       defaultScope: {

@@ -14,7 +14,8 @@ describe('/answers', () => {
     describe('POST /answers', () => {
       it('creates a new answer in the database', async () => {
         const response = await request(app).post('/answers').send({
-          answer: 'Correct Answer'
+          answer: 'Correct Answer',
+          result: 'correct'
         })
         const newAnswerRecord = await Answer.findByPk(response.body.id, {
           raw: true
@@ -26,7 +27,8 @@ describe('/answers', () => {
       })
       it('does not create a new answer in the database--no text', async () => {
         const response = await request(app).post('/answers').send({
-          answer: ""
+          answer: "",
+          result: 'correct'
         })
         const newAnswerRecord = await Answer.findByPk(response.body.id, {
           raw: true
@@ -38,7 +40,8 @@ describe('/answers', () => {
       })
       it('does not create a new answer in the database--NULL', async () => {
         const response = await request(app).post('/answers').send({
-          answer: null
+          answer: null,
+          result: 'correct'
         })
         const newAnswerRecord = await Answer.findByPk(response.body.id, {
           raw: true
@@ -56,13 +59,16 @@ describe('/answers', () => {
     beforeEach(async () => {
       answers = await Promise.all([
         Answer.create({
-          answer: 'Correct Answer1'
+          answer: 'Correct Answer1',
+          result: 'correct1'
         }),
         Answer.create({
-          answer: 'Correct Answer2'
+          answer: 'Correct Answer2',
+          result: 'correct2'
         }),
         Answer.create({
-          answer: 'Correct Answer3'
+          answer: 'Correct Answer3',
+          result: 'correct3'
         })
       ])
     })
