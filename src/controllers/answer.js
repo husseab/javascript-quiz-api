@@ -2,10 +2,14 @@ const { createItem, getAllItems, getItemById, updateItem, deleteItem } = require
 
 const createAnswer = (req, res) => createItem(res, 'answer', req.body)
 
-const getAllAnswers = (req, res) => getAllItems(res, 'answer')
-
-const getAnswerByID = (req, res) => getItemById(res, 'answer', req.params.id)
-
+const getAllAnswers = (req, res) => { 
+  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  return  getAllItems(res, 'answer')
+}
+const getAnswerByID = (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  return getItemById(res, 'answer', req.params.id)
+}
 const updateAnswer = (req, res) => updateItem(res, 'answer', req.body, req.params.id)
 
 const deleteAnswer = (req, res) => deleteItem(res, 'answer', req.params.id)
