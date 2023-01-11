@@ -83,7 +83,7 @@ $ npm i -S mysql2
 $ npm i -D mocha chai supertest
 ```
 
-## Using the app
+### Using the app
 
 To start the app on your localhost use 
 ```
